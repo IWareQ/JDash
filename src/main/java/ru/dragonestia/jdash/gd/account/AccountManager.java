@@ -134,7 +134,7 @@ public class AccountManager {
     public void publishComment(Account account, String encodedText) {
         try (Connection conn = sql2o.open()) {
             conn.createQuery("INSERT INTO profile_comments (owner, text) VALUES ("+ account.getUid() +", :text);")
-                    .addParameter(encodedText)
+                    .addParameter("text", encodedText)
                     .executeUpdate();
         }
     }
@@ -142,7 +142,7 @@ public class AccountManager {
     public List<ProfileComment> getComments(Account account, int page) {
         try (Connection conn = sql2o.open()) {
             return conn.createQuery("SELECT * FROM profile_comments WHERE owner = "+ account.getUid() + " " +
-                    "ORDER BY uid DESC OFFSET "+ (page * 10) +" LIMIT 10;").executeAndFetch(ProfileComment.class);
+                    "ORDER BY uid DESC LIMIT 10 OFFSET "+ (page * 10) +";").executeAndFetch(ProfileComment.class);
         }
     }
 
@@ -150,6 +150,20 @@ public class AccountManager {
         try (Connection conn = sql2o.open()) {
             return conn.createQuery("SELECT COUNT(*) FROM profile_comments WHERE owner = "+ account.getUid() +";")
                     .executeScalar(Integer.class);
+        }
+    }
+
+    public ProfileComment getComment(int commentId) {
+        try (Connection conn = sql2o.open()) {
+            return conn.createQuery("SELECT * FROM profile_comments WHERE uid = "+ commentId +" LIMIT 1;")
+                    .executeAndFetchFirst(ProfileComment.class);
+        }
+    }
+
+    public void deleteComment(ProfileComment comment) {
+        try (Connection conn = sql2o.open()) {
+            conn.createQuery("DELETE FROM profile_comments WHERE uid = "+ comment.getUid() + ";")
+                    .executeUpdate().commit();
         }
     }
 }
