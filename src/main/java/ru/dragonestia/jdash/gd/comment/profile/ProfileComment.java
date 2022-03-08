@@ -13,4 +13,8 @@ public class ProfileComment {
     private Date time;
     private boolean spam;
     private int likes;
+
+    public ProfileCommentBuilder getOutputBuilder() {
+        return new ProfileCommentBuilder(this);
+    }
 }

@@ -22,6 +22,7 @@ public class ProfileCommentBuilder {
     }
 
     protected void init() {
+        setElement(Element.PLAYER_ID, comment.getOwner());
         setElement(Element.TEXT, comment.getText());
         setElement(Element.LIKES, comment.getLikes());
         setElement(Element.UNKNOWN_ELEMENT, 0);
