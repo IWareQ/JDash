@@ -1,6 +1,5 @@
 package ru.dragonestia.jdash.controller;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.dragonestia.jdash.JDashApplication;
@@ -51,7 +50,6 @@ public class CommentsController {
 
         if (account == null || encodedText.length() == 0) return "-1";
 
-        System.out.println(new String(Base64.decodeBase64(encodedText)));
         accountManager.publishComment(account, encodedText);
         return "1";
     }
