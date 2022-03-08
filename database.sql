@@ -62,3 +62,16 @@ CREATE TABLE IF NOT EXISTS skins (
     FOREIGN KEY(player) REFERENCES players (uid)
                                  ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS profile_comments (
+    uid INTEGER NOT NULL AUTO_INCREMENT,
+    owner INTEGER NOT NULL,
+    text TEXT NOT NULL,
+    time DATETIME NOT NULL DEFAULT NOW(),
+    spam BOOLEAN NOT NULL DEFAULT FALSE,
+    likes INTEGER NOT NULL DEFAULT 0,
+
+    PRIMARY KEY(uid),
+    FOREIGN KEY(owner) REFERENCES accounts (uid)
+                                            ON DELETE CASCADE
+);

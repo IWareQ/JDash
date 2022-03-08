@@ -1,4 +1,4 @@
-package ru.dragonestia.jdash.gd.util.comment;
+package ru.dragonestia.jdash.gd.comment.profile;
 
 import lombok.Getter;
 
@@ -8,9 +8,12 @@ public class ProfileCommentBuilder {
 
     public static final String COMMENT_SEPARATOR = "|";
 
+    @Getter private final ProfileComment comment;
     private final HashMap<Element, Object> elements = new HashMap<>();
 
-    public ProfileCommentBuilder(){
+    public ProfileCommentBuilder(ProfileComment comment){
+        this.comment = comment;
+
         init();
     }
 
@@ -19,13 +22,12 @@ public class ProfileCommentBuilder {
     }
 
     protected void init() {
-        //TODO: Установка свойств элементов сообения
-        setElement(Element.TEXT, "QkBQQEJK");
-        setElement(Element.LIKES, 0);
-        setElement(Element.UNKNOWN_ELEMENT, 2);
-        setElement(Element.DATE, "Watatatattttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt t t t ttttterwr ewr wer");
-        setElement(Element.IS_SPAM, 0);
-        setElement(Element.COMMENT_ID, 2);
+        setElement(Element.TEXT, comment.getText());
+        setElement(Element.LIKES, comment.getLikes());
+        setElement(Element.UNKNOWN_ELEMENT, 0);
+        setElement(Element.DATE, "Andrew, do it later"); //TODO: Сделать отображение даты как на оф.сервере
+        setElement(Element.IS_SPAM, comment.isSpam()? 1 : 0);
+        setElement(Element.COMMENT_ID, comment.getUid());
     }
 
     @Override

@@ -7,8 +7,11 @@ import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 import ru.dragonestia.jdash.gd.account.model.Account;
 import ru.dragonestia.jdash.gd.account.model.AccountSettings;
+import ru.dragonestia.jdash.gd.comment.profile.ProfileComment;
 import ru.dragonestia.jdash.gd.player.PlayerManager;
 import ru.dragonestia.jdash.gd.util.GeometryJumpSecure;
+
+import java.util.List;
 
 @Component
 public class AccountManager {
@@ -125,6 +128,28 @@ public class AccountManager {
                             "WHERE account = "+ account.getUid() +";"
                     ).executeUpdate()
                     .commit();
+        }
+    }
+
+    public void publishComment(Account account, String encodedText) {
+        try (Connection conn = sql2o.open()) {
+            conn.createQuery("INSERT INTO profile_comments (owner, text) VALUES ("+ account.getUid() +", :text);")
+                    .addParameter(encodedText)
+                    .executeUpdate();
+        }
+    }
+
+    public List<ProfileComment> getComments(Account account, int page) {
+        try (Connection conn = sql2o.open()) {
+            return conn.createQuery("SELECT * FROM profile_comments WHERE owner = "+ account.getUid() + " " +
+                    "ORDER BY uid DESC OFFSET "+ (page * 10) +" LIMIT 10;").executeAndFetch(ProfileComment.class);
+        }
+    }
+
+    public int countComments(Account account) {
+        try (Connection conn = sql2o.open()) {
+            return conn.createQuery("SELECT COUNT(*) FROM profile_comments WHERE owner = "+ account.getUid() +";")
+                    .executeScalar(Integer.class);
         }
     }
 }
