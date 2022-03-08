@@ -64,7 +64,7 @@ public class CommentsController {
         if(account == null) return "-1";
 
         ProfileComment comment = accountManager.getComment(commentId);
-        if(comment == null) return "-1";
+        if(comment == null || comment.getOwner() != account.getUid()) return "-1";
 
         accountManager.deleteComment(comment);
         return "1";
