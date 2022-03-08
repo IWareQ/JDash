@@ -16,7 +16,7 @@ Working process
     - [X] Save/load data
     - [X] Upload data
     - [X] Settings
-    - [ ] Profile comments
+    - [X] Profile comments
     - [ ] Friend system
     - [ ] Chests
     - [ ] Quests
