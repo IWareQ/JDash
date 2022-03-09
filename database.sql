@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS accounts (
     youtube VARCHAR(255) NOT NULL DEFAULT '',
     register DATETIME NOT NULL DEFAULT NOW(),
     activated BOOLEAN NOT NULL DEFAULT TRUE,
+    creatorPoints INTEGER NOT NULL DEFAULT 0,
 
     PRIMARY KEY(uid)
 );

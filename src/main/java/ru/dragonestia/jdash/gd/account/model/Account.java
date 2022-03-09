@@ -17,6 +17,7 @@ public class Account {
     private String youtube;
     private Date register;
     private boolean activated;
+    private int creatorPoints;
 
     private Account() {
 
