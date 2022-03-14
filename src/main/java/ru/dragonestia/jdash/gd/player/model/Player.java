@@ -3,9 +3,10 @@ package ru.dragonestia.jdash.gd.player.model;
 import lombok.Getter;
 import lombok.Setter;
 import ru.dragonestia.jdash.gd.account.model.Account;
+import ru.dragonestia.jdash.gd.player.IPlayer;
 
 @Getter
-public class Player {
+public class Player implements IPlayer {
 
     private int uid;
     private int accountId;
@@ -24,5 +25,10 @@ public class Player {
 
     public void init(Account account) {
         this.account = account;
+    }
+
+    @Override
+    public int getId() {
+        return uid;
     }
 }

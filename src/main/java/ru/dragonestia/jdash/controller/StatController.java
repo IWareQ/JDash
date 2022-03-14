@@ -56,6 +56,8 @@ public class StatController {
         if (targetAccountId == account.getUid()) playerStatBuilder = new SelfPlayerStatBuilder(target, targetPlayer, targetSkin, targetSettings);
         else playerStatBuilder = new OtherPlayerStatBuilder(target, targetPlayer, targetSkin, targetSettings);
 
+        playerStatBuilder.setElement(AbstractPlayerStatBuilder.StatElement.RANK, playerManager.getGlobalRank(targetPlayer));
+
         return playerStatBuilder.toString();
     }
 }

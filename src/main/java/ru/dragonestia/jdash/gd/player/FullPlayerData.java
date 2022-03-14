@@ -3,7 +3,7 @@ package ru.dragonestia.jdash.gd.player;
 import lombok.Getter;
 
 @Getter
-public class FullPlayerData {
+public class FullPlayerData implements IPlayer {
 
     private int id;
     private int accountId;

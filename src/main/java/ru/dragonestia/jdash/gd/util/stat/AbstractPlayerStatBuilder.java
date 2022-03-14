@@ -33,7 +33,6 @@ public abstract class AbstractPlayerStatBuilder {
     protected void init() {
         setElement(StatElement.NAME, account.getLogin());
         setElement(StatElement.CREATOR_POINTS, 0); //TODO: Сделать другое вычисление кп
-        setElement(StatElement.RANK, 1); //TODO: Сделать вычисление рейтинга игрока
         setElement(StatElement.PLAYER_ID, player.getUid());
         setElement(StatElement.ACCOUNT_ID, account.getUid());
         setElement(StatElement.SHOW_RANK, 1); //TODO: Система банов

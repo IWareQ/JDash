@@ -204,8 +204,7 @@ public class PlayerManager {
                             "    JOIN accounts a on a.uid = p.accountId " +
                             "ORDER BY " +
                             "    stars DESC, " +
-                            "    userCoins DESC, " +
-                            "    coins DESC," +
+                            "    demons DESC, " +
                             "    id " +
                             "LIMIT 100;"
             ).executeAndFetchLazy(FullPlayerData.class);
@@ -264,5 +263,21 @@ public class PlayerManager {
         }
 
         return list;
+    }
+
+    public int getGlobalRank(IPlayer player) {
+        try (Connection conn = sql2o.open()) {
+            return conn.createQuery(
+                    "SELECT COUNT(*) + 1 FROM players " +
+                            "WHERE " +
+                            "    stars < "+ player.getStars() +" OR " +
+                            "    (stars = "+ player.getStars() +" AND demons < "+ player.getDemons() +") OR " +
+                            "    (stars = "+ player.getStars() +" AND demons = "+ player.getDemons() +" AND uid < "+ player.getId() +") " +
+                            "ORDER BY " +
+                            "         stars DESC, " +
+                            "         demons DESC, " +
+                            "         uid DESC;"
+            ).executeScalar(Integer.class);
+        }
     }
 }
