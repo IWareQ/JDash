@@ -8,6 +8,7 @@ public class FullPlayerData {
     private int id;
     private int accountId;
     private String name;
+    private int creatorPoints;
     private int stars;
     private int demons;
     private int coins;

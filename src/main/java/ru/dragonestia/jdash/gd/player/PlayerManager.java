@@ -137,6 +137,7 @@ public class PlayerManager {
                             "    p.uid as id, " +
                             "    p.accountId as accountId, " +
                             "    a.login as name, " +
+                            "    a.creatorPoints as creatorPoints, " +
                             "    p.stars as stars, " +
                             "    p.demons as demons, " +
                             "    p.coins as coins, " +
