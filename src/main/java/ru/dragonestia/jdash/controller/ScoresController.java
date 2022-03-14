@@ -36,6 +36,10 @@ public class ScoresController {
                 players = playerManager.getTopByStars();
                 break;
 
+            case CREATORS:
+                players = playerManager.getTopByCreatorPoints();
+                break;
+
             default:
                 players = new ArrayList<>();
         }

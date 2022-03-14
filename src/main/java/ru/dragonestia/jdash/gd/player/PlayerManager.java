@@ -218,4 +218,51 @@ public class PlayerManager {
 
         return list;
     }
+
+    public ArrayList<ScoreStatBuilder> getTopByCreatorPoints() {
+        ArrayList<ScoreStatBuilder> list = new ArrayList<>();
+        try (Connection conn = sql2o.open()) {
+            ResultSetIterable<FullPlayerData> resultSet = conn.createQuery(
+                    "SELECT " +
+                            "    p.uid as id, " +
+                            "    p.accountId as accountId, " +
+                            "    a.login as name, " +
+                            "    a.creatorPoints as creatorPoints, " +
+                            "    p.stars as stars, " +
+                            "    p.demons as demons, " +
+                            "    p.coins as coins, " +
+                            "    p.userCoins as userCoins, " +
+                            "    p.diamonds as diamonds, " +
+                            "    s.icon as skinIcon, " +
+                            "    s.firstColor as skinFirstColor, " +
+                            "    s.secondColor as skinSecondColor, " +
+                            "    s.iconType as skinIconType, " +
+                            "    s.special as skinSpecial, " +
+                            "    s.accIcon as skinAccIcon, " +
+                            "    s.accShip as skinAccShip, " +
+                            "    s.accBall as skinAccBall, " +
+                            "    s.accBird as skinAccBird, " +
+                            "    s.accDart as skinAccDart, " +
+                            "    s.accRobot as skinAccRobot, " +
+                            "    s.accGlow as skinAccGlow, " +
+                            "    s.accSpider as skinAccSpider, " +
+                            "    s.accExplosion as skinAccExplosion " +
+                            "FROM players p " +
+                            "    JOIN skins s ON p.uid = s.player " +
+                            "    JOIN accounts a on a.uid = p.accountId " +
+                            "WHERE a.creatorPoints != 0 " +
+                            "ORDER BY " +
+                            "    creatorPoints DESC, " +
+                            "    id " +
+                            "LIMIT 100;"
+            ).executeAndFetchLazy(FullPlayerData.class);
+
+            int i = 1;
+            for (FullPlayerData data: resultSet) {
+                list.add(new ScoreStatBuilder(i++, data));
+            }
+        }
+
+        return list;
+    }
 }

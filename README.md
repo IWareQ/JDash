@@ -33,7 +33,7 @@ Working process
     - [X] Top-100
     - [ ] Top-friends
     - [ ] Global score
-    - [ ] Top creators
+    - [X] Top creators
 
 Credits
 ----------
