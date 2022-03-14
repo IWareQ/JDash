@@ -30,7 +30,7 @@ Working process
     - [ ] Featured/epic levels
     - [ ] Daily/weekly levels
 - [ ] Scores
-    - [ ] Top-100
+    - [X] Top-100
     - [ ] Top-friends
     - [ ] Global score
     - [ ] Top creators

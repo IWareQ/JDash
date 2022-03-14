@@ -32,6 +32,10 @@ public class ScoresController {
         ArrayList<ScoreStatBuilder> players;
 
         switch (type) {
+            case TOP:
+                players = playerManager.getTopByStars();
+                break;
+
             default:
                 players = new ArrayList<>();
         }
