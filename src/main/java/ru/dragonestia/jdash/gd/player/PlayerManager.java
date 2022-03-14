@@ -128,4 +128,42 @@ public class PlayerManager {
             }
         }
     }
+
+    public FullPlayerData getFullPlayerData(int playerId) throws IllegalArgumentException {
+        FullPlayerData player;
+        try (Connection conn = sql2o.open()) {
+            player = conn.createQuery(
+                    "SELECT " +
+                            "    p.uid as id, " +
+                            "    p.accountId as accountId, " +
+                            "    a.login as name, " +
+                            "    p.stars as stars, " +
+                            "    p.demons as demons, " +
+                            "    p.coins as coins, " +
+                            "    p.userCoins as userCoins, " +
+                            "    p.diamonds as diamonds, " +
+                            "    s.icon as skinIcon, " +
+                            "    s.firstColor as skinFirstColor, " +
+                            "    s.secondColor as skinSecondColor, " +
+                            "    s.iconType as skinIconType, " +
+                            "    s.special as skinSpecial, " +
+                            "    s.accIcon as skinAccIcon, " +
+                            "    s.accShip as skinAccShip, " +
+                            "    s.accBall as skinAccBall, " +
+                            "    s.accBird as skinAccBird, " +
+                            "    s.accDart as skinAccDart, " +
+                            "    s.accRobot as skinAccRobot, " +
+                            "    s.accGlow as skinAccGlow, " +
+                            "    s.accSpider as skinAccSpider, " +
+                            "    s.accExplosion as skinAccExplosion " +
+                            "FROM players p " +
+                            "    JOIN skins s ON p.uid = s.player " +
+                            "    JOIN accounts a on a.uid = p.accountId " +
+                            "WHERE p.uid = "+ playerId +" LIMIT 1;"
+                    ).executeAndFetchFirst(FullPlayerData.class);
+        }
+        if (player == null) throw new IllegalArgumentException("Player not found");
+
+        return player;
+    }
 }
