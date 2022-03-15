@@ -268,11 +268,11 @@ public class PlayerManager {
     public int getGlobalRank(IPlayer player) {
         try (Connection conn = sql2o.open()) {
             return conn.createQuery(
-                    "SELECT COUNT(*) + 1 FROM players " +
+                    "SELECT COUNT(*) FROM players " +
                             "WHERE " +
-                            "    stars < "+ player.getStars() +" OR " +
-                            "    (stars = "+ player.getStars() +" AND demons < "+ player.getDemons() +") OR " +
-                            "    (stars = "+ player.getStars() +" AND demons = "+ player.getDemons() +" AND uid < "+ player.getId() +") " +
+                            "    stars > "+ player.getStars() +" OR " +
+                            "    (stars = "+ player.getStars() +" AND demons > "+ player.getDemons() +") OR " +
+                            "    (stars = "+ player.getStars() +" AND demons = "+ player.getDemons() +" AND uid >= "+ player.getId() +") " +
                             "ORDER BY " +
                             "         stars DESC, " +
                             "         demons DESC, " +
