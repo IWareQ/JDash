@@ -280,4 +280,67 @@ public class PlayerManager {
             ).executeScalar(Integer.class);
         }
     }
+
+    public ArrayList<ScoreStatBuilder> getRelativeTopByPlayer(IPlayer player) {
+        ArrayList<ScoreStatBuilder> list = new ArrayList<>();
+        try (Connection conn = sql2o.open()) {
+            ResultSetIterable<FullPlayerData> resultSet = conn.createQuery(
+                    "SELECT fpd.* FROM (( " +
+                            "    SELECT " +
+                            "        p.uid as id, p.accountId as accountId, a.login as name, a.creatorPoints as creatorPoints, " +
+                            "        p.stars as stars, p.demons as demons, p.coins as coins, p.userCoins as userCoins, " +
+                            "        p.diamonds as diamonds, s.icon as skinIcon, s.firstColor as skinFirstColor, " +
+                            "        s.secondColor as skinSecondColor, s.iconType as skinIconType, s.accIcon as skinAccIcon, " +
+                            "        s.accShip as skinAccShip, s.accBall as skinAccBall, s.accBird as skinAccBird, " +
+                            "        s.accDart as skinAccDart, s.accRobot as skinAccRobot, s.accGlow as skinAccGlow, " +
+                            "        s.accSpider as skinAccSpider, s.accExplosion as skinAccExplosion " +
+                            "    FROM players p " +
+                            "        JOIN accounts a on a.uid = p.accountId " +
+                            "        JOIN skins s on p.uid = s.player " +
+                            "    WHERE " +
+                            "        p.stars > "+ player.getStars() +" OR " +
+                            "        (p.stars = "+ player.getStars() +" AND p.demons > "+ player.getDemons() +") OR " +
+                            "        (p.stars = "+ player.getStars() +" AND p.demons = "+ player.getDemons() +" AND p.uid >= "+ player.getId() +") " +
+                            "    ORDER BY " +
+                            "        stars, " +
+                            "        demons, " +
+                            "        id " +
+                            "    LIMIT 25 " +
+                            ") UNION ( " +
+                            "    SELECT " +
+                            "        p.uid as id, p.accountId as accountId, a.login as name, a.creatorPoints as creatorPoints, " +
+                            "        p.stars as stars, p.demons as demons, p.coins as coins, p.userCoins as userCoins, " +
+                            "        p.diamonds as diamonds, s.icon as skinIcon, s.firstColor as skinFirstColor, " +
+                            "        s.secondColor as skinSecondColor, s.iconType as skinIconType, s.accIcon as skinAccIcon, " +
+                            "        s.accShip as skinAccShip, s.accBall as skinAccBall, s.accBird as skinAccBird, " +
+                            "        s.accDart as skinAccDart, s.accRobot as skinAccRobot, s.accGlow as skinAccGlow, " +
+                            "        s.accSpider as skinAccSpider, s.accExplosion as skinAccExplosion " +
+                            "    FROM players p " +
+                            "        JOIN accounts a on a.uid = p.accountId " +
+                            "        JOIN skins s on p.uid = s.player " +
+                            "    WHERE " +
+                            "        p.stars < "+ player.getStars() +" OR " +
+                            "        (p.stars = "+ player.getStars() +" AND p.demons < "+ player.getDemons() +") OR " +
+                            "        (p.stars = "+ player.getStars() +" AND p.demons = "+ player.getDemons() +" AND p.uid < "+ player.getId() +") " +
+                            "    ORDER BY " +
+                            "        stars DESC, " +
+                            "        demons DESC, " +
+                            "        id DESC " +
+                            "    LIMIT 25 " +
+                            ")) as fpd ORDER BY " +
+                            "   fpd.stars DESC, " +
+                            "   fpd.demons DESC, " +
+                            "   fpd.id DESC;"
+            ).executeAndFetchLazy(FullPlayerData.class);
+
+            int i = -1;
+            for (FullPlayerData target: resultSet) {
+                if (i == -1) i = getGlobalRank(target);
+
+                list.add(new ScoreStatBuilder(i++, target));
+            }
+        }
+
+        return list;
+    }
 }

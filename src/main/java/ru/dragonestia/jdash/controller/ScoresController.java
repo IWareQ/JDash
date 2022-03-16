@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.dragonestia.jdash.JDashApplication;
 import ru.dragonestia.jdash.gd.account.model.Account;
 import ru.dragonestia.jdash.gd.player.PlayerManager;
+import ru.dragonestia.jdash.gd.player.model.Player;
 import ru.dragonestia.jdash.gd.util.score.ScoreStatBuilder;
 import ru.dragonestia.jdash.gd.util.score.ScoreType;
 
@@ -28,6 +29,7 @@ public class ScoresController {
                     @RequestAttribute Account account) {
 
         if(account == null || type == null) return "-1";
+        Player player = playerManager.getPlayer(account);
 
         ArrayList<ScoreStatBuilder> players;
 
@@ -38,6 +40,10 @@ public class ScoresController {
 
             case CREATORS:
                 players = playerManager.getTopByCreatorPoints();
+                break;
+
+            case RELATIVE:
+                players = playerManager.getRelativeTopByPlayer(player);
                 break;
 
             default:
