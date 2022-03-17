@@ -132,6 +132,45 @@ BEGIN
     );
 END; $
 
+CREATE FUNCTION IF NOT EXISTS JDash_hasRequestFrom(acc INTEGER, target INTEGER)
+    RETURNS BOOLEAN
+    READS SQL DATA
+    NOT DETERMINISTIC
+BEGIN
+    RETURN (
+        SELECT COUNT(*) != 0
+        FROM friend_requests
+        WHERE
+            sender = target AND
+            receiver = acc
+        );
+END $
+
+CREATE FUNCTION IF NOT EXISTS JDash_canSendFriendRequest(sender INTEGER, receiver INTEGER)
+    RETURNS BOOLEAN
+    READS SQL DATA
+    NOT DETERMINISTIC
+BEGIN
+    IF (JDash_isFriend(sender, receiver)) THEN
+        RETURN FALSE;
+    END IF;
+
+    IF (JDash_hasRequestFrom(receiver, sender)) THEN
+        RETURN TRUE;
+    END IF;
+
+    IF (SELECT COUNT(*) = 0
+        FROM settings
+        WHERE
+            account = receiver AND
+            friend = 0) THEN
+
+        RETURN FALSE;
+    END IF;
+
+    RETURN TRUE;
+END $
+
 
 CREATE TRIGGER IF NOT EXISTS JDash_automaticBothFriendRequestAcceptor AFTER INSERT ON friend_requests
     FOR EACH ROW
