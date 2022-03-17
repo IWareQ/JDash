@@ -76,3 +76,72 @@ CREATE TABLE IF NOT EXISTS profile_comments (
     FOREIGN KEY(owner) REFERENCES accounts (uid)
                                             ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS friend_requests (
+    uid INTEGER NOT NULL AUTO_INCREMENT,
+    sender INTEGER NOT NULL,
+    receiver INTEGER NOT NULL,
+
+    PRIMARY KEY(uid),
+    FOREIGN KEY(sender) REFERENCES accounts (uid)
+       ON DELETE CASCADE,
+    FOREIGN KEY(receiver) REFERENCES accounts (uid)
+       ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS friends (
+    uid INTEGER NOT NULL AUTO_INCREMENT,
+    account1 INTEGER NOT NULL,
+    account2 INTEGER NOT NULL,
+
+    PRIMARY KEY(uid),
+    FOREIGN KEY(account1) REFERENCES accounts (uid)
+       ON DELETE CASCADE,
+    FOREIGN KEY(account2) REFERENCES accounts (uid)
+       ON DELETE CASCADE
+);
+
+
+DELIMITER $
+
+CREATE FUNCTION IF NOT EXISTS JDash_isFriend(account1 INTEGER, account2 INTEGER)
+    RETURNS BOOLEAN
+    READS SQL DATA
+    NOT DETERMINISTIC
+BEGIN
+    RETURN (
+        SELECT COUNT(*) != 0
+        FROM friends as f
+        WHERE
+            (f.account1 = account1 AND f.account2 = account2)OR
+            (f.account2 = account1 AND f.account1 = account2)
+    );
+END; $
+
+CREATE FUNCTION IF NOT EXISTS JDash_checkBothFriendRequests(account1 INT, account2 INT)
+    RETURNS BOOLEAN
+    READS SQL DATA
+    NOT DETERMINISTIC
+BEGIN
+    RETURN (
+        SELECT COUNT(*) = 2
+        FROM friend_requests as r
+        WHERE
+            (r.sender = account1 AND r.receiver = account2) OR
+            (r.receiver = account1 AND r.sender = account2)
+    );
+END; $
+
+
+CREATE TRIGGER IF NOT EXISTS JDash_automaticBothFriendRequestAcceptor AFTER INSERT ON friend_requests
+    FOR EACH ROW
+BEGIN
+    IF (JDash_checkBothFriendRequests(new.sender, new.receiver)) THEN
+        DELETE FROM friend_requests
+        WHERE
+            (sender = new.sender AND receiver = new.receiver) OR
+            (receiver = new.sender AND sender = new.receiver);
+    END IF;
+END; $
+
+DELIMITER ;
