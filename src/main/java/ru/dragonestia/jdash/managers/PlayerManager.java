@@ -21,7 +21,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 
 @Component
-public class PlayerManager {
+public class PlayerManager implements IPlayerManager {
 
     private Sql2o sql2o;
 

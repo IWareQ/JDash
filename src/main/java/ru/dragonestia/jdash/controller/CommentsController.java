@@ -3,10 +3,10 @@ package ru.dragonestia.jdash.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.dragonestia.jdash.JDashApplication;
-import ru.dragonestia.jdash.managers.AccountManager;
+import ru.dragonestia.jdash.managers.IAccountManager;
+import ru.dragonestia.jdash.managers.IPlayerManager;
 import ru.dragonestia.jdash.model.account.Account;
 import ru.dragonestia.jdash.model.profilecomment.ProfileComment;
-import ru.dragonestia.jdash.managers.PlayerManager;
 import ru.dragonestia.jdash.model.profilecomment.ProfileCommentBuilder;
 
 import java.util.List;
@@ -15,10 +15,10 @@ import java.util.List;
 @RequestMapping(JDashApplication.DATABASE_ADDRESS)
 public class CommentsController {
 
-    private final AccountManager accountManager;
+    private final IAccountManager accountManager;
 
     @Autowired
-    public CommentsController(PlayerManager playerManager, AccountManager accountManager) {
+    public CommentsController(IPlayerManager playerManager, IAccountManager accountManager) {
         this.accountManager = accountManager;
     }
 
