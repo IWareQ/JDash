@@ -7,17 +7,17 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.dragonestia.jdash.JDashApplication;
 import ru.dragonestia.jdash.converter.ScoreTypeResolveConverter;
-import ru.dragonestia.jdash.managers.AccountManager;
 import ru.dragonestia.jdash.interceptor.AccountAuthorisationInterceptor;
 import ru.dragonestia.jdash.interceptor.DebugInterceptor;
+import ru.dragonestia.jdash.managers.IAccountManager;
 
 @Configuration
 public class WebContext implements WebMvcConfigurer {
 
-    private final AccountManager accountManager;
+    private final IAccountManager accountManager;
 
     @Autowired
-    public WebContext(AccountManager accountManager) {
+    public WebContext(IAccountManager accountManager) {
         this.accountManager = accountManager;
     }
 

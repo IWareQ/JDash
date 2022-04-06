@@ -5,7 +5,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import ru.dragonestia.jdash.JDashApplication;
 import ru.dragonestia.jdash.exceptions.AccountException;
-import ru.dragonestia.jdash.managers.AccountManager;
+import ru.dragonestia.jdash.managers.IAccountManager;
 import ru.dragonestia.jdash.model.account.Account;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class AccountAuthorisationInterceptor implements HandlerInterceptor {
 
-    private final AccountManager accountManager;
+    private final IAccountManager accountManager;
 
-    public AccountAuthorisationInterceptor(AccountManager accountManager) {
+    public AccountAuthorisationInterceptor(IAccountManager accountManager) {
         this.accountManager = accountManager;
     }
 

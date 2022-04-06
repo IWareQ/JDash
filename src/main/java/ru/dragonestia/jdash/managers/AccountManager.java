@@ -14,7 +14,7 @@ import ru.dragonestia.jdash.utils.GeometryJumpSecure;
 import java.util.List;
 
 @Component
-public class AccountManager {
+public class AccountManager implements IAccountManager {
 
     private Sql2o sql2o;
     private PlayerManager playerManager;

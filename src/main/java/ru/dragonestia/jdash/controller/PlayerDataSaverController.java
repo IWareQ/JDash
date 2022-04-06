@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.dragonestia.jdash.JDashApplication;
 import ru.dragonestia.jdash.exceptions.AccountException;
-import ru.dragonestia.jdash.managers.AccountManager;
+import ru.dragonestia.jdash.managers.IAccountManager;
+import ru.dragonestia.jdash.managers.IPlayerManager;
 import ru.dragonestia.jdash.model.account.Account;
 import ru.dragonestia.jdash.model.account.AccountSettings;
-import ru.dragonestia.jdash.managers.PlayerManager;
 import ru.dragonestia.jdash.model.player.Player;
 import ru.dragonestia.jdash.model.player.PlayerSkin;
 
@@ -17,11 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(JDashApplication.DATABASE_ADDRESS)
 public class PlayerDataSaverController {
 
-    private final PlayerManager playerManager;
-    private final AccountManager accountManager;
+    private final IPlayerManager playerManager;
+    private final IAccountManager accountManager;
 
     @Autowired
-    public PlayerDataSaverController(PlayerManager playerManager, AccountManager accountManager){
+    public PlayerDataSaverController(IPlayerManager playerManager, IAccountManager accountManager){
         this.playerManager = playerManager;
         this.accountManager = accountManager;
     }
