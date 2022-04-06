@@ -6,7 +6,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.dragonestia.jdash.JDashApplication;
-import ru.dragonestia.jdash.converter.ScoreTypeEnum2StringConverter;
+import ru.dragonestia.jdash.converter.ScoreTypeResolveConverter;
 import ru.dragonestia.jdash.gd.account.AccountManager;
 import ru.dragonestia.jdash.interceptor.AccountAuthorisationInterceptor;
 import ru.dragonestia.jdash.interceptor.DebugInterceptor;
@@ -29,6 +29,6 @@ public class WebContext implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new ScoreTypeEnum2StringConverter());
+        registry.addConverter(new ScoreTypeResolveConverter());
     }
 }
