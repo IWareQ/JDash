@@ -1,4 +1,4 @@
-package ru.dragonestia.jdash.model.player;
+package ru.dragonestia.jdash.managers;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,11 +6,13 @@ import org.springframework.stereotype.Component;
 import org.sql2o.Connection;
 import org.sql2o.ResultSetIterable;
 import org.sql2o.Sql2o;
-import ru.dragonestia.jdash.model.account.AccountException;
-import ru.dragonestia.jdash.model.account.model.Account;
-import ru.dragonestia.jdash.model.player.model.Player;
-import ru.dragonestia.jdash.model.player.model.Skin;
-import ru.dragonestia.jdash.model.util.score.ScoreStatBuilder;
+import ru.dragonestia.jdash.exceptions.AccountException;
+import ru.dragonestia.jdash.model.account.Account;
+import ru.dragonestia.jdash.model.player.FullPlayerData;
+import ru.dragonestia.jdash.model.player.IPlayer;
+import ru.dragonestia.jdash.model.player.Player;
+import ru.dragonestia.jdash.model.player.PlayerSkin;
+import ru.dragonestia.jdash.model.score.ScoreStatBuilder;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -80,14 +82,14 @@ public class PlayerManager {
         }
     }
 
-    public Skin getSkin(Player player) {
+    public PlayerSkin getSkin(Player player) {
         try (Connection conn = sql2o.open()) {
             return conn.createQuery("SELECT * FROM skins WHERE player = "+ player.getUid() + " LIMIT 1;")
-                    .executeAndFetchFirst(Skin.class);
+                    .executeAndFetchFirst(PlayerSkin.class);
         }
     }
 
-    public void updateSkin(Skin skin) {
+    public void updateSkin(PlayerSkin skin) {
         try (Connection conn = sql2o.open()) {
             conn.createQuery(
                     "UPDATE skins SET " +

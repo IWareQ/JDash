@@ -3,13 +3,13 @@ package ru.dragonestia.jdash.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.dragonestia.jdash.JDashApplication;
-import ru.dragonestia.jdash.model.account.AccountException;
-import ru.dragonestia.jdash.model.account.AccountManager;
-import ru.dragonestia.jdash.model.account.model.Account;
-import ru.dragonestia.jdash.model.account.model.AccountSettings;
-import ru.dragonestia.jdash.model.player.PlayerManager;
-import ru.dragonestia.jdash.model.player.model.Player;
-import ru.dragonestia.jdash.model.player.model.Skin;
+import ru.dragonestia.jdash.exceptions.AccountException;
+import ru.dragonestia.jdash.managers.AccountManager;
+import ru.dragonestia.jdash.model.account.Account;
+import ru.dragonestia.jdash.model.account.AccountSettings;
+import ru.dragonestia.jdash.managers.PlayerManager;
+import ru.dragonestia.jdash.model.player.Player;
+import ru.dragonestia.jdash.model.player.PlayerSkin;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -106,7 +106,7 @@ public class PlayerDataSaverController {
         player.setStars(stars);
         playerManager.updatePlayer(player);
 
-        Skin skin = playerManager.getSkin(player);
+        PlayerSkin skin = playerManager.getSkin(player);
         skin.setIcon(icon);
         skin.setFirstColor(firstColor);
         skin.setSecondColor(secondColor);
