@@ -1,4 +1,4 @@
-package ru.dragonestia.jdash.gd.player;
+package ru.dragonestia.jdash.model.player;
 
 public interface IPlayer {
 

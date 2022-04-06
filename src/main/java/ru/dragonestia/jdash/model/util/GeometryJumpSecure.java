@@ -1,4 +1,4 @@
-package ru.dragonestia.jdash.gd.util;
+package ru.dragonestia.jdash.model.util;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 

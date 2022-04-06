@@ -1,7 +1,7 @@
-package ru.dragonestia.jdash.gd.util.score;
+package ru.dragonestia.jdash.model.util.score;
 
 import lombok.Getter;
-import ru.dragonestia.jdash.gd.player.FullPlayerData;
+import ru.dragonestia.jdash.model.player.FullPlayerData;
 
 import java.util.HashMap;
 

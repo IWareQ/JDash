@@ -3,11 +3,11 @@ package ru.dragonestia.jdash.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.dragonestia.jdash.JDashApplication;
-import ru.dragonestia.jdash.gd.account.AccountException;
-import ru.dragonestia.jdash.gd.account.AccountManager;
-import ru.dragonestia.jdash.gd.account.model.Account;
-import ru.dragonestia.jdash.gd.player.PlayerManager;
-import ru.dragonestia.jdash.gd.player.model.Player;
+import ru.dragonestia.jdash.model.account.AccountException;
+import ru.dragonestia.jdash.model.account.AccountManager;
+import ru.dragonestia.jdash.model.account.model.Account;
+import ru.dragonestia.jdash.model.player.PlayerManager;
+import ru.dragonestia.jdash.model.player.model.Player;
 
 @RestController
 @RequestMapping(JDashApplication.DATABASE_ADDRESS + "/accounts")

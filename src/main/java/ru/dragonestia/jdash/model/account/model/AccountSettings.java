@@ -1,4 +1,4 @@
-package ru.dragonestia.jdash.gd.account.model;
+package ru.dragonestia.jdash.model.account.model;
 
 import lombok.Getter;
 import lombok.Setter;

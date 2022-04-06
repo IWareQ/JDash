@@ -1,4 +1,4 @@
-package ru.dragonestia.jdash.gd.player;
+package ru.dragonestia.jdash.model.player;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 import org.sql2o.Connection;
 import org.sql2o.ResultSetIterable;
 import org.sql2o.Sql2o;
-import ru.dragonestia.jdash.gd.account.AccountException;
-import ru.dragonestia.jdash.gd.account.model.Account;
-import ru.dragonestia.jdash.gd.player.model.Player;
-import ru.dragonestia.jdash.gd.player.model.Skin;
-import ru.dragonestia.jdash.gd.util.score.ScoreStatBuilder;
+import ru.dragonestia.jdash.model.account.AccountException;
+import ru.dragonestia.jdash.model.account.model.Account;
+import ru.dragonestia.jdash.model.player.model.Player;
+import ru.dragonestia.jdash.model.player.model.Skin;
+import ru.dragonestia.jdash.model.util.score.ScoreStatBuilder;
 
 import java.io.BufferedReader;
 import java.io.File;
