@@ -1,9 +1,8 @@
-package ru.dragonestia.jdash.gd.player.model;
+package ru.dragonestia.jdash.model.player;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.dragonestia.jdash.gd.account.model.Account;
-import ru.dragonestia.jdash.gd.player.IPlayer;
+import ru.dragonestia.jdash.model.account.Account;
 
 @Getter
 public class Player implements IPlayer {

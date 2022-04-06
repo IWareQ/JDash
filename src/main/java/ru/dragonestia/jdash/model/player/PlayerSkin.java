@@ -1,10 +1,12 @@
-package ru.dragonestia.jdash.gd.player.model;
+package ru.dragonestia.jdash.model.player;
 
 import lombok.Getter;
 import lombok.Setter;
 
+// todo: Этот класс можно переименовать во что-нибудь получше.
+
 @Getter
-public class Skin {
+public class PlayerSkin {
 
     private int uid;
     private int player;
@@ -23,7 +25,7 @@ public class Skin {
     @Setter private int accSpider;
     @Setter private int accExplosion;
 
-    private Skin() {
+    private PlayerSkin() {
 
     }
 }

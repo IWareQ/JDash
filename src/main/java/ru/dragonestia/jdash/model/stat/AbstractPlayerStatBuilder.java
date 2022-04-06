@@ -1,10 +1,10 @@
-package ru.dragonestia.jdash.gd.util.stat;
+package ru.dragonestia.jdash.model.stat;
 
 import lombok.Getter;
-import ru.dragonestia.jdash.gd.account.model.Account;
-import ru.dragonestia.jdash.gd.account.model.AccountSettings;
-import ru.dragonestia.jdash.gd.player.model.Player;
-import ru.dragonestia.jdash.gd.player.model.Skin;
+import ru.dragonestia.jdash.model.account.Account;
+import ru.dragonestia.jdash.model.account.AccountSettings;
+import ru.dragonestia.jdash.model.player.Player;
+import ru.dragonestia.jdash.model.player.PlayerSkin;
 
 import java.util.HashMap;
 
@@ -12,12 +12,12 @@ public abstract class AbstractPlayerStatBuilder {
 
     protected final Account account;
     protected final Player player;
-    protected final Skin skin;
+    protected final PlayerSkin skin;
     protected final AccountSettings settings;
 
     protected final HashMap<StatElement, Object> elements = new HashMap<>();
 
-    public AbstractPlayerStatBuilder(Account account, Player player, Skin skin, AccountSettings settings){
+    public AbstractPlayerStatBuilder(Account account, Player player, PlayerSkin skin, AccountSettings settings){
         this.account = account;
         this.player = player;
         this.skin = skin;

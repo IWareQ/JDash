@@ -3,14 +3,13 @@ package ru.dragonestia.jdash.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.dragonestia.jdash.JDashApplication;
-import ru.dragonestia.jdash.gd.account.AccountException;
-import ru.dragonestia.jdash.gd.account.AccountManager;
-import ru.dragonestia.jdash.gd.account.model.Account;
-import ru.dragonestia.jdash.gd.account.model.AccountSettings;
-import ru.dragonestia.jdash.gd.player.PlayerManager;
-import ru.dragonestia.jdash.gd.player.model.Player;
-import ru.dragonestia.jdash.gd.player.model.Skin;
-import ru.dragonestia.jdash.gd.util.GeometryJumpSecure;
+import ru.dragonestia.jdash.exceptions.AccountException;
+import ru.dragonestia.jdash.managers.IAccountManager;
+import ru.dragonestia.jdash.managers.IPlayerManager;
+import ru.dragonestia.jdash.model.account.Account;
+import ru.dragonestia.jdash.model.account.AccountSettings;
+import ru.dragonestia.jdash.model.player.Player;
+import ru.dragonestia.jdash.model.player.PlayerSkin;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,11 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(JDashApplication.DATABASE_ADDRESS)
 public class PlayerDataSaverController {
 
-    private final PlayerManager playerManager;
-    private final AccountManager accountManager;
+    private final IPlayerManager playerManager;
+    private final IAccountManager accountManager;
 
     @Autowired
-    public PlayerDataSaverController(PlayerManager playerManager, AccountManager accountManager){
+    public PlayerDataSaverController(IPlayerManager playerManager, IAccountManager accountManager){
         this.playerManager = playerManager;
         this.accountManager = accountManager;
     }
@@ -107,7 +106,7 @@ public class PlayerDataSaverController {
         player.setStars(stars);
         playerManager.updatePlayer(player);
 
-        Skin skin = playerManager.getSkin(player);
+        PlayerSkin skin = playerManager.getSkin(player);
         skin.setIcon(icon);
         skin.setFirstColor(firstColor);
         skin.setSecondColor(secondColor);

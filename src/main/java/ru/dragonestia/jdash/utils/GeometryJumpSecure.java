@@ -1,7 +1,8 @@
-package ru.dragonestia.jdash.gd.util;
+package ru.dragonestia.jdash.utils;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 
+// todo: Это можно переименовать во что-нибудь получше
 public class GeometryJumpSecure {
 
     private static final String PASSWORD_SEED = "37526";

@@ -1,20 +1,20 @@
-package ru.dragonestia.jdash.gd.account;
+package ru.dragonestia.jdash.managers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
-import ru.dragonestia.jdash.gd.account.model.Account;
-import ru.dragonestia.jdash.gd.account.model.AccountSettings;
-import ru.dragonestia.jdash.gd.comment.profile.ProfileComment;
-import ru.dragonestia.jdash.gd.player.PlayerManager;
-import ru.dragonestia.jdash.gd.util.GeometryJumpSecure;
+import ru.dragonestia.jdash.exceptions.AccountException;
+import ru.dragonestia.jdash.model.account.Account;
+import ru.dragonestia.jdash.model.account.AccountSettings;
+import ru.dragonestia.jdash.model.profilecomment.ProfileComment;
+import ru.dragonestia.jdash.utils.GeometryJumpSecure;
 
 import java.util.List;
 
 @Component
-public class AccountManager {
+public class AccountManager implements IAccountManager {
 
     private Sql2o sql2o;
     private PlayerManager playerManager;

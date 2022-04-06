@@ -3,16 +3,16 @@ package ru.dragonestia.jdash.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.dragonestia.jdash.JDashApplication;
-import ru.dragonestia.jdash.gd.account.AccountException;
-import ru.dragonestia.jdash.gd.account.AccountManager;
-import ru.dragonestia.jdash.gd.account.model.Account;
-import ru.dragonestia.jdash.gd.account.model.AccountSettings;
-import ru.dragonestia.jdash.gd.player.PlayerManager;
-import ru.dragonestia.jdash.gd.player.model.Player;
-import ru.dragonestia.jdash.gd.player.model.Skin;
-import ru.dragonestia.jdash.gd.util.stat.AbstractPlayerStatBuilder;
-import ru.dragonestia.jdash.gd.util.stat.OtherPlayerStatBuilder;
-import ru.dragonestia.jdash.gd.util.stat.SelfPlayerStatBuilder;
+import ru.dragonestia.jdash.exceptions.AccountException;
+import ru.dragonestia.jdash.managers.AccountManager;
+import ru.dragonestia.jdash.managers.PlayerManager;
+import ru.dragonestia.jdash.model.account.Account;
+import ru.dragonestia.jdash.model.account.AccountSettings;
+import ru.dragonestia.jdash.model.player.Player;
+import ru.dragonestia.jdash.model.player.PlayerSkin;
+import ru.dragonestia.jdash.model.stat.AbstractPlayerStatBuilder;
+import ru.dragonestia.jdash.model.stat.OtherPlayerStatBuilder;
+import ru.dragonestia.jdash.model.stat.SelfPlayerStatBuilder;
 
 @RestController
 @RequestMapping(JDashApplication.DATABASE_ADDRESS)
@@ -36,7 +36,7 @@ public class StatController {
 
         Account target;
         Player targetPlayer;
-        Skin targetSkin;
+        PlayerSkin targetSkin;
         AccountSettings targetSettings;
 
         if(targetAccountId == account.getUid()) {

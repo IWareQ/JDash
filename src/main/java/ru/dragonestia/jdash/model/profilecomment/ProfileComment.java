@@ -1,4 +1,4 @@
-package ru.dragonestia.jdash.gd.comment.profile;
+package ru.dragonestia.jdash.model.profilecomment;
 
 import lombok.Getter;
 

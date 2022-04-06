@@ -1,13 +1,13 @@
-package ru.dragonestia.jdash.gd.util.stat;
+package ru.dragonestia.jdash.model.stat;
 
-import ru.dragonestia.jdash.gd.account.model.Account;
-import ru.dragonestia.jdash.gd.account.model.AccountSettings;
-import ru.dragonestia.jdash.gd.player.model.Player;
-import ru.dragonestia.jdash.gd.player.model.Skin;
+import ru.dragonestia.jdash.model.account.Account;
+import ru.dragonestia.jdash.model.account.AccountSettings;
+import ru.dragonestia.jdash.model.player.Player;
+import ru.dragonestia.jdash.model.player.PlayerSkin;
 
 public class SelfPlayerStatBuilder extends AbstractPlayerStatBuilder {
 
-    public SelfPlayerStatBuilder(Account account, Player player, Skin skin, AccountSettings settings) {
+    public SelfPlayerStatBuilder(Account account, Player player, PlayerSkin skin, AccountSettings settings) {
         super(account, player, skin, settings);
     }
 
