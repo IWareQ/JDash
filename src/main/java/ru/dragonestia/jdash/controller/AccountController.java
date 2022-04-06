@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.dragonestia.jdash.JDashApplication;
 import ru.dragonestia.jdash.exceptions.AccountException;
+import ru.dragonestia.jdash.exceptions.AccountRegistrationException;
 import ru.dragonestia.jdash.managers.IAccountManager;
 import ru.dragonestia.jdash.managers.IPlayerManager;
 import ru.dragonestia.jdash.model.account.Account;
@@ -33,11 +34,9 @@ public class AccountController {
 
         if(login.length() > 20) return "-4";
 
-        Account account;
         try {
-            account = accountManager.registerAccount(login, password, email);
-            // todo: catch AccountRegistrationException
-        } catch (AccountException ex) {
+            accountManager.registerAccount(login, password, email);
+        } catch (AccountRegistrationException ex) {
             return "-2";
         }
 

@@ -6,6 +6,8 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 import ru.dragonestia.jdash.exceptions.AccountException;
+import ru.dragonestia.jdash.exceptions.AccountRegistrationException;
+import ru.dragonestia.jdash.exceptions.NoSuchAccountException;
 import ru.dragonestia.jdash.model.account.Account;
 import ru.dragonestia.jdash.model.account.AccountSettings;
 import ru.dragonestia.jdash.model.profilecomment.ProfileComment;
@@ -25,15 +27,7 @@ public class AccountManager implements IAccountManager {
         this.playerManager = playerManager;
     }
 
-    public boolean isRegistered(String login) {
-        try (Connection conn = sql2o.open()) {
-            return conn.createQuery("SELECT COUNT(*) FROM accounts WHERE login = :login LIMIT 1;")
-                    .addParameter("login", login)
-                    .executeScalar(Integer.class) != 0;
-        }
-    }
-
-    public Account registerAccount(String login, String password, String email) throws AccountException {
+    public void registerAccount(String login, String password, String email) throws AccountRegistrationException {
         Account account;
         try (Connection conn = sql2o.beginTransaction()) {
             try {
@@ -43,7 +37,7 @@ public class AccountManager implements IAccountManager {
                         .addParameter("email", email)
                         .executeUpdate();
             } catch (Sql2oException ex) {
-                throw new AccountException("This login already used");
+                throw new AccountRegistrationException("This login already used");
             }
 
             account = conn.createQuery("SELECT * FROM accounts WHERE login = :login LIMIT 1;")
@@ -57,31 +51,30 @@ public class AccountManager implements IAccountManager {
 
         }
         playerManager.createPlayer(account);
-        return account;
     }
 
-    public Account getAccount(int id) throws AccountException {
+    public Account getAccount(int id) throws NoSuchAccountException {
         try (Connection conn = sql2o.open()) {
             Account account = conn.createQuery("SELECT * FROM accounts WHERE uid = "+ id +" LIMIT 1;")
                     .executeAndFetchFirst(Account.class);
 
-            if(account == null) throw new AccountException("Invalid account id");
+            if(account == null) throw new NoSuchAccountException("Invalid account id");
             return account;
         }
     }
 
-    public Account getAccount(String login) throws AccountException {
+    public Account getAccount(String login) throws NoSuchAccountException {
         try (Connection conn = sql2o.open()) {
             Account account = conn.createQuery("SELECT * FROM accounts WHERE login = :login LIMIT 1;")
                     .addParameter("login", login)
                     .executeAndFetchFirst(Account.class);
 
-            if(account == null) throw new AccountException("Invalid account id");
+            if(account == null) throw new NoSuchAccountException("Invalid account id");
             return account;
         }
     }
 
-    public Account login(String login, String password) throws AccountException {
+    public Account login(String login, String password) throws NoSuchAccountException {
         Account account;
         try (Connection conn = sql2o.open()) {
             account = conn.createQuery(
@@ -92,7 +85,7 @@ public class AccountManager implements IAccountManager {
                     .addParameter("password", password)
                     .executeAndFetchFirst(Account.class);
         }
-        if(account == null) throw new AccountException("Account not found");
+        if(account == null) throw new NoSuchAccountException("Account not found");
         return account;
     }
 
