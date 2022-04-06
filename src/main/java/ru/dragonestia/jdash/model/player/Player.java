@@ -1,8 +1,8 @@
-package ru.dragonestia.jdash.model.player.model;
+package ru.dragonestia.jdash.model.player;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.dragonestia.jdash.model.account.model.Account;
+import ru.dragonestia.jdash.model.account.Account;
 import ru.dragonestia.jdash.model.player.IPlayer;
 
 @Getter

@@ -1,4 +1,4 @@
-package ru.dragonestia.jdash.model.util.score;
+package ru.dragonestia.jdash.model.score;
 
 public enum ScoreType {
     TOP, CREATORS, RELATIVE, FRIENDS

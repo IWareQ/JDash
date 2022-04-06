@@ -1,4 +1,4 @@
-package ru.dragonestia.jdash.model.account;
+package ru.dragonestia.jdash.exceptions;
 
 import lombok.Getter;
 

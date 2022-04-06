@@ -1,7 +1,7 @@
 package ru.dragonestia.jdash.converter;
 
 import org.springframework.core.convert.converter.Converter;
-import ru.dragonestia.jdash.model.util.score.ScoreType;
+import ru.dragonestia.jdash.model.score.ScoreType;
 
 public class ScoreTypeResolveConverter implements Converter<String, ScoreType> {
 

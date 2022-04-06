@@ -1,17 +1,19 @@
-package ru.dragonestia.jdash.model.util.score;
+package ru.dragonestia.jdash.model.score;
 
 import lombok.Getter;
 import ru.dragonestia.jdash.model.player.FullPlayerData;
 
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class ScoreStatBuilder {
 
     public static final String SCORE_SEPARATOR = "|";
 
     private final int position;
-    @Getter private final FullPlayerData player;
-    private final HashMap<ScoreStatElement, Object> elements = new HashMap<>();
+    @Getter
+    private final FullPlayerData player;
+    private final Map<ScoreStatElement, Object> elements = new EnumMap<>(ScoreStatElement.class);
 
     public ScoreStatBuilder(int position, FullPlayerData player) {
         this.position = position;
@@ -48,7 +50,7 @@ public class ScoreStatBuilder {
         String[] buffer = new String[elements.size() * 2];
 
         int i = 0;
-        for(ScoreStatElement element: elements.keySet()) {
+        for (ScoreStatElement element : elements.keySet()) {
             buffer[i * 2] = element.getCode();
             buffer[i * 2 + 1] = elements.get(element).toString();
 

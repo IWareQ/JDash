@@ -4,9 +4,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import ru.dragonestia.jdash.JDashApplication;
-import ru.dragonestia.jdash.model.account.AccountException;
-import ru.dragonestia.jdash.model.account.AccountManager;
-import ru.dragonestia.jdash.model.account.model.Account;
+import ru.dragonestia.jdash.exceptions.AccountException;
+import ru.dragonestia.jdash.managers.AccountManager;
+import ru.dragonestia.jdash.model.account.Account;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

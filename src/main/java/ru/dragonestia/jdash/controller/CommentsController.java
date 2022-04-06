@@ -3,11 +3,11 @@ package ru.dragonestia.jdash.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.dragonestia.jdash.JDashApplication;
-import ru.dragonestia.jdash.model.account.AccountManager;
-import ru.dragonestia.jdash.model.account.model.Account;
-import ru.dragonestia.jdash.model.comment.profile.ProfileComment;
-import ru.dragonestia.jdash.model.player.PlayerManager;
-import ru.dragonestia.jdash.model.comment.profile.ProfileCommentBuilder;
+import ru.dragonestia.jdash.managers.AccountManager;
+import ru.dragonestia.jdash.model.account.Account;
+import ru.dragonestia.jdash.model.profilecomment.ProfileComment;
+import ru.dragonestia.jdash.managers.PlayerManager;
+import ru.dragonestia.jdash.model.profilecomment.ProfileCommentBuilder;
 
 import java.util.List;
 
