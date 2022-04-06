@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import ru.dragonestia.jdash.JDashApplication;
 import ru.dragonestia.jdash.converter.ScoreTypeResolveConverter;
-import ru.dragonestia.jdash.gd.account.AccountManager;
+import ru.dragonestia.jdash.model.account.AccountManager;
 import ru.dragonestia.jdash.interceptor.AccountAuthorisationInterceptor;
 import ru.dragonestia.jdash.interceptor.DebugInterceptor;
 

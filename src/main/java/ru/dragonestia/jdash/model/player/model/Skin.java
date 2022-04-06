@@ -1,4 +1,4 @@
-package ru.dragonestia.jdash.gd.player.model;
+package ru.dragonestia.jdash.model.player.model;
 
 import lombok.Getter;
 import lombok.Setter;
