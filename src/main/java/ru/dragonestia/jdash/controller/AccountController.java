@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.dragonestia.jdash.JDashApplication;
+import ru.dragonestia.jdash.exceptions.AccountAuthenticationException;
 import ru.dragonestia.jdash.exceptions.AccountException;
 import ru.dragonestia.jdash.exceptions.AccountRegistrationException;
+import ru.dragonestia.jdash.exceptions.NoSuchAccountException;
 import ru.dragonestia.jdash.managers.IAccountManager;
 import ru.dragonestia.jdash.managers.IPlayerManager;
 import ru.dragonestia.jdash.model.account.Account;
@@ -53,7 +55,7 @@ public class AccountController {
         Account account;
         try {
             account = accountManager.login(login, password);
-        } catch (AccountException ex) {
+        } catch (NoSuchAccountException | AccountAuthenticationException noSuchAccount) {
             return "-1";
         }
         Player player = playerManager.getPlayer(account);
