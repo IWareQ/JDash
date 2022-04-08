@@ -8,6 +8,7 @@ import ru.dragonestia.jdash.managers.IAccountManager;
 import ru.dragonestia.jdash.managers.IPlayerManager;
 import ru.dragonestia.jdash.model.account.Account;
 import ru.dragonestia.jdash.model.account.AccountSettings;
+import ru.dragonestia.jdash.model.account.AccountSettings.*;
 import ru.dragonestia.jdash.model.player.Player;
 import ru.dragonestia.jdash.model.player.PlayerSkin;
 
@@ -139,9 +140,15 @@ public class PlayerDataSaverController {
         if (account == null) return "-1";
 
         AccountSettings settings = accountManager.getSettings(account);
-        settings.setMessages(messages);
-        settings.setComments(comments);
-        settings.setFriend(friend);
+
+        settings.setAllowMessagesFrom(AllowMessagesFrom.fromValue(messages));
+        settings.setAllowFriendRequestsFrom(AllowFriendRequestsFrom.fromValue(friend));
+        settings.setShowCommentHistoryTo(ShowCommentHistoryTo.fromValue(comments));
+
+        settings.setYoutube(youtube);
+        settings.setTwitch(twitch);
+        settings.setTwitter(twitter);
+
         accountManager.updateSettings(account, settings);
 
         return "1";

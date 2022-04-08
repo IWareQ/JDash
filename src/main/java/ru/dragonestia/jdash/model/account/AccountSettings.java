@@ -6,47 +6,74 @@ import lombok.Setter;
 @Getter
 public class AccountSettings {
 
-    private int uid;
-    private int account;
-    @Setter private int messages = AllowMessagesValues.ALL.value;
-    @Setter private int comments = ShowCommentsHistory.ALL.value;
-    @Setter private int friend = AllowFriendRequests.ALL.value;
-
-    public enum AllowMessagesValues {
+    @Getter
+    public enum AllowMessagesFrom {
         ALL(0),
         FRIENDS(1),
         NONE(2);
 
-        @Getter
-        private final int value;
+        final int value;
 
-        AllowMessagesValues(int value){
+        AllowMessagesFrom(int value) {
             this.value = value;
+        }
+
+        public static AllowMessagesFrom fromValue(int value) {
+            switch (value) {
+                case 0: return ALL;
+                case 1: return FRIENDS;
+                case 2: return NONE;
+                default: throw new IllegalArgumentException(String.valueOf(value));
+            }
         }
     }
 
-    public enum ShowCommentsHistory {
+    @Getter
+    public enum AllowFriendRequestsFrom {
+        ALL(0),
+        NONE(1);
+
+        final int value;
+
+        AllowFriendRequestsFrom(int value) {
+            this.value = value;
+        }
+
+        public static AllowFriendRequestsFrom fromValue(int value) {
+            switch (value) {
+                case 0: return ALL;
+                case 1: return NONE;
+                default: throw new IllegalArgumentException(String.valueOf(value));
+            }
+        }
+    }
+
+    @Getter
+    public enum ShowCommentHistoryTo {
         ALL(0),
         FRIENDS(1),
         ME(2);
 
-        @Getter
-        private final int value;
+        final int value;
 
-        ShowCommentsHistory(int value){
+        ShowCommentHistoryTo(int value) {
             this.value = value;
+        }
+
+        public static ShowCommentHistoryTo fromValue(int value) {
+            switch (value) {
+                case 0: return ALL;
+                case 1: return FRIENDS;
+                case 2: return ME;
+                default: throw new IllegalArgumentException(String.valueOf(value));
+            }
         }
     }
 
-    public enum AllowFriendRequests {
-        ALL(0),
-        NONE(1);
+    int uid, account;
 
-        @Getter
-        private final int value;
-
-        AllowFriendRequests(int value){
-            this.value = value;
-        }
-    }
+    @Setter AllowMessagesFrom allowMessagesFrom;
+    @Setter AllowFriendRequestsFrom allowFriendRequestsFrom;
+    @Setter ShowCommentHistoryTo showCommentHistoryTo;
+    @Setter String youtube, twitter, twitch;
 }
